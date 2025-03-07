@@ -1,10 +1,10 @@
 {% extends 'base.html' %}
 
-{% block title %}Fashion Store - Home{% endblock %}
+{% block title %}The Luxc - Home{% endblock %}
 
 {% block content %}
     <section class="hero">
-        <h1>Welcome to Fashion Store</h1>
+        <h1>Welcome to The Luxc</h1>
         <p>Discover the latest trends in fashion for men, women, and kids. Quality clothing at affordable prices.</p>
         <div>
             <a href="{{ url_for('category', category='men') }}" class="btn">Shop Men</a>
@@ -33,7 +33,7 @@
                     <img src="{{ url_for('static', filename='images/' + product.image) }}" alt="{{ product.name }}" class="product-image">
                     <div class="product-info">
                         <h3 class="product-name">{{ product.name }}</h3>
-                        <p class="product-price">${{ product.price }}</p>
+                        <p class="product-price">{{ currency_symbol }}{{ product.price }}</p>
                         <a href="{{ url_for('product_detail', product_id=product.id) }}" class="btn">View Details</a>
                     </div>
                 </div>

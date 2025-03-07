@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
-{% block title %}Shopping Cart - Fashion Store{% endblock %}
+{% block title %}Shopping Cart - The Luxc{% endblock %}
 
 {% block content %}
     <h1 class="section-title">Shopping Cart</h1>
@@ -30,7 +30,7 @@
                                         </div>
                                     </div>
                                 </td>
-                                <td>${{ item.price }}</td>
+                                <td>{{ currency_symbol }}{{ item.price }}</td>
                                 <td>
                                     <div class="cart-quantity">
                                         <form action="{{ url_for('update_cart') }}" method="post">
@@ -46,7 +46,7 @@
                                         </form>
                                     </div>
                                 </td>
-                                <td>${{ (item.price * item.quantity)|round(2) }}</td>
+                                <td>{{ currency_symbol }}{{ (item.price * item.quantity)|round(2) }}</td>
                                 <td>
                                     <form action="{{ url_for('update_cart') }}" method="post">
                                         <input type="hidden" name="product_id" value="{{ item.id }}">
@@ -64,7 +64,7 @@
                 <div class="cart-summary">
                     <div class="cart-total">
                         <span>Total:</span>
-                        <span>${{ cart_total|round(2) }}</span>
+                        <span>{{ currency_symbol }}{{ cart_total|round(2) }}</span>
                     </div>
                     <a href="{{ url_for('checkout') }}" class="btn" style="width: 100%;">Proceed to Checkout</a>
                     <a href="{{ url_for('home') }}" class="btn btn-secondary" style="width: 100%; margin-top: 10px;">Continue Shopping</a>

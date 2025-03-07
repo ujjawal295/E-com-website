@@ -1,0 +1,70 @@
+[
+    {
+        "id": "k1",
+        "name": "Kids T-Shirt",
+        "price": 1499,
+        "image": "kids_tshirt.jpg",
+        "category": "kids",
+        "description": "A comfortable and colorful t-shirt for kids. Made from soft, durable fabric that can withstand active play.",
+        "features": [
+            "100% cotton",
+            "Regular fit",
+            "Crew neck",
+            "Short sleeves",
+            "Machine washable"
+        ],
+        "stock": 60,
+        "sizes": ["2-3Y", "4-5Y", "6-7Y", "8-9Y", "10-11Y"]
+    },
+    {
+        "id": "k2",
+        "name": "Kids Jeans",
+        "price": 2249,
+        "image": "kids_jeans.jpg",
+        "category": "kids",
+        "description": "Durable and comfortable jeans for kids. Perfect for everyday wear and active play.",
+        "features": [
+            "98% cotton, 2% elastane",
+            "Regular fit",
+            "Adjustable waistband",
+            "Five-pocket styling",
+            "Machine washable"
+        ],
+        "stock": 40,
+        "sizes": ["2-3Y", "4-5Y", "6-7Y", "8-9Y", "10-11Y"]
+    },
+    {
+        "id": "k3",
+        "name": "Kids Dress",
+        "price": 2625,
+        "image": "kids_dress.jpg",
+        "category": "kids",
+        "description": "A cute and comfortable dress for little girls. Perfect for special occasions or everyday wear.",
+        "features": [
+            "100% cotton",
+            "A-line silhouette",
+            "Round neck",
+            "Short sleeves",
+            "Machine washable"
+        ],
+        "stock": 35,
+        "sizes": ["2-3Y", "4-5Y", "6-7Y", "8-9Y", "10-11Y"]
+    },
+    {
+        "id": "k4",
+        "name": "Kids Hoodie",
+        "price": 2999,
+        "image": "kids_hoodie.jpg",
+        "category": "kids",
+        "description": "A warm and cozy hoodie for kids. Perfect for cooler days and outdoor activities.",
+        "features": [
+            "80% cotton, 20% polyester",
+            "Regular fit",
+            "Hood with drawstring",
+            "Kangaroo pocket",
+            "Machine washable"
+        ],
+        "stock": 30,
+        "sizes": ["2-3Y", "4-5Y", "6-7Y", "8-9Y", "10-11Y"]
+    }
+] 

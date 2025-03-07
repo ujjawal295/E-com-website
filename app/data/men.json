@@ -1,0 +1,70 @@
+[
+    {
+        "id": "m1",
+        "name": "Classic T-Shirt",
+        "price": 2249,
+        "image": "men_tshirt.jpg",
+        "category": "men",
+        "description": "A comfortable and stylish classic t-shirt made from 100% cotton. Perfect for casual everyday wear.",
+        "features": [
+            "100% premium cotton",
+            "Regular fit",
+            "Crew neck",
+            "Machine washable",
+            "Available in multiple colors"
+        ],
+        "stock": 50,
+        "sizes": ["S", "M", "L", "XL", "XXL"]
+    },
+    {
+        "id": "m2",
+        "name": "Slim Fit Jeans",
+        "price": 3749,
+        "image": "men_jeans.jpg",
+        "category": "men",
+        "description": "Modern slim fit jeans with a comfortable stretch. These jeans offer both style and comfort for everyday wear.",
+        "features": [
+            "98% cotton, 2% elastane",
+            "Slim fit",
+            "Five-pocket styling",
+            "Button and zip fly",
+            "Machine washable"
+        ],
+        "stock": 35,
+        "sizes": ["28", "30", "32", "34", "36", "38"]
+    },
+    {
+        "id": "m3",
+        "name": "Casual Shirt",
+        "price": 2999,
+        "image": "men_shirt.jpg",
+        "category": "men",
+        "description": "A versatile casual shirt that can be dressed up or down. Perfect for work or weekend wear.",
+        "features": [
+            "100% cotton",
+            "Regular fit",
+            "Button-down collar",
+            "Chest pocket",
+            "Machine washable"
+        ],
+        "stock": 40,
+        "sizes": ["S", "M", "L", "XL", "XXL"]
+    },
+    {
+        "id": "m4",
+        "name": "Formal Blazer",
+        "price": 6749,
+        "image": "men_blazer.jpg",
+        "category": "men",
+        "description": "A sophisticated formal blazer perfect for business meetings or special occasions. Tailored for a modern fit.",
+        "features": [
+            "65% polyester, 35% viscose",
+            "Slim fit",
+            "Two-button closure",
+            "Three pockets",
+            "Dry clean only"
+        ],
+        "stock": 25,
+        "sizes": ["38", "40", "42", "44", "46"]
+    }
+] 

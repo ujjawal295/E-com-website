@@ -1,9 +1,15 @@
 from flask import Flask, render_template, request, redirect, url_for, session, flash
+from flask_login import LoginManager, current_user
 import os
 import json
 from werkzeug.utils import secure_filename
 from datetime import datetime, timedelta
 import random
+
+# Import User model directly
+from app.models.user import User
+# Import auth blueprint
+from app.auth import auth
 
 app = Flask(__name__, 
             static_folder='app/static',
@@ -11,27 +17,35 @@ app = Flask(__name__,
 
 app.secret_key = 'your_secret_key'  # Change this to a random secret key in production
 
-# Sample product data - in a real app, this would come from a database
-PRODUCTS = {
-    'men': [
-        {'id': 'm1', 'name': 'Classic T-Shirt', 'price': 29.99, 'image': 'men_tshirt.jpg', 'category': 'men'},
-        {'id': 'm2', 'name': 'Slim Fit Jeans', 'price': 49.99, 'image': 'men_jeans.jpg', 'category': 'men'},
-        {'id': 'm3', 'name': 'Casual Shirt', 'price': 39.99, 'image': 'men_shirt.jpg', 'category': 'men'},
-        {'id': 'm4', 'name': 'Formal Blazer', 'price': 89.99, 'image': 'men_blazer.jpg', 'category': 'men'}
-    ],
-    'women': [
-        {'id': 'w1', 'name': 'Summer Dress', 'price': 59.99, 'image': 'women_dress.jpg', 'category': 'women'},
-        {'id': 'w2', 'name': 'Skinny Jeans', 'price': 54.99, 'image': 'women_jeans.jpg', 'category': 'women'},
-        {'id': 'w3', 'name': 'Blouse', 'price': 34.99, 'image': 'women_blouse.jpg', 'category': 'women'},
-        {'id': 'w4', 'name': 'Cardigan', 'price': 44.99, 'image': 'women_cardigan.jpg', 'category': 'women'}
-    ],
-    'kids': [
-        {'id': 'k1', 'name': 'Kids T-Shirt', 'price': 19.99, 'image': 'kids_tshirt.jpg', 'category': 'kids'},
-        {'id': 'k2', 'name': 'Kids Jeans', 'price': 29.99, 'image': 'kids_jeans.jpg', 'category': 'kids'},
-        {'id': 'k3', 'name': 'Kids Dress', 'price': 34.99, 'image': 'kids_dress.jpg', 'category': 'kids'},
-        {'id': 'k4', 'name': 'Kids Hoodie', 'price': 39.99, 'image': 'kids_hoodie.jpg', 'category': 'kids'}
-    ]
-}
+# Initialize Flask-Login
+login_manager = LoginManager()
+login_manager.login_view = 'auth.login'  # Changed back to 'auth.login'
+login_manager.init_app(app)
+
+@login_manager.user_loader
+def load_user(user_id):
+    return User.get_user_by_id(user_id)
+
+# Register blueprints
+app.register_blueprint(auth, url_prefix='/auth')
+
+# Load product data from JSON files
+def load_products():
+    products = {}
+    categories = ['men', 'women', 'kids']
+    
+    for category in categories:
+        try:
+            with open(f'app/data/{category}.json', 'r') as f:
+                products[category] = json.load(f)
+        except Exception as e:
+            print(f"Error loading {category} products: {e}")
+            products[category] = []
+    
+    return products
+
+# Global products data
+PRODUCTS = load_products()
 
 # Initialize shopping cart in session
 def init_cart():
@@ -44,14 +58,15 @@ def home():
     featured_products = []
     for category in PRODUCTS:
         featured_products.extend(PRODUCTS[category][:2])  # Add 2 products from each category
-    return render_template('index.html', featured_products=featured_products)
+    return render_template('index.html', featured_products=featured_products, currency_symbol='₹')
 
 @app.route('/category/<category>')
 def category(category):
     if category in PRODUCTS:
         return render_template('category.html', 
                               products=PRODUCTS[category], 
-                              category=category.capitalize())
+                              category=category.capitalize(),
+                              currency_symbol='₹')
     return redirect(url_for('home'))
 
 @app.route('/product/<product_id>')
@@ -62,7 +77,10 @@ def product_detail(product_id):
             if product['id'] == product_id:
                 # Get related products from the same category
                 related_products = PRODUCTS[product['category']]
-                return render_template('product_detail.html', product=product, related_products=related_products)
+                return render_template('product_detail.html', 
+                                      product=product, 
+                                      related_products=related_products,
+                                      currency_symbol='₹')
     
     # If product not found
     flash('Product not found', 'error')
@@ -107,7 +125,7 @@ def add_to_cart():
 def view_cart():
     init_cart()
     cart_total = sum(item['price'] * item['quantity'] for item in session['cart'])
-    return render_template('cart.html', cart=session['cart'], cart_total=cart_total)
+    return render_template('cart.html', cart=session['cart'], cart_total=cart_total, currency_symbol='₹')
 
 @app.route('/update_cart', methods=['POST'])
 def update_cart():
@@ -138,7 +156,7 @@ def checkout():
         return redirect(url_for('home'))
     
     cart_total = sum(item['price'] * item['quantity'] for item in session['cart'])
-    return render_template('checkout.html', cart=session['cart'], cart_total=cart_total)
+    return render_template('checkout.html', cart=session['cart'], cart_total=cart_total, currency_symbol='₹')
 
 @app.route('/place_order', methods=['POST'])
 def place_order():
@@ -160,7 +178,8 @@ def order_confirmation():
     return render_template('order_confirmation.html', 
                           order_number=order_number,
                           order_date=order_date,
-                          delivery_date=delivery_date)
+                          delivery_date=delivery_date,
+                          currency_symbol='₹')
 
 @app.route('/about')
 def about():
@@ -169,6 +188,16 @@ def about():
 @app.route('/contact')
 def contact():
     return render_template('contact.html')
+
+# Update base template context
+@app.context_processor
+def inject_user():
+    return dict(user=current_user)
+
+# Add currency symbol to all templates
+@app.context_processor
+def inject_currency():
+    return dict(currency_symbol='₹')
 
 if __name__ == '__main__':
     app.run(debug=True) 

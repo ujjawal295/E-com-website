@@ -1,4 +1,4 @@
-# E-Commerce Website for Fashion
+# The Luxc - E-Commerce Website
 
 A beautiful and easy-to-use e-commerce website for men's, women's, and kids' wear built with Flask, HTML, and CSS.
 
@@ -32,7 +32,7 @@ A beautiful and easy-to-use e-commerce website for men's, women's, and kids' wea
 ## Project Structure
 
 ```
-E-Commerce Website/
+The Luxc/
 ├── app.py                  # Main Flask application
 ├── requirements.txt        # Python dependencies
 ├── app/
@@ -41,7 +41,8 @@ E-Commerce Website/
 │   │   ├── js/             # JavaScript files
 │   │   └── images/         # Product and site images
 │   ├── templates/          # HTML templates
-│   └── models/             # Data models (for future database integration)
+│   ├── models/             # Data models
+│   └── data/               # JSON data files
 └── README.md               # This file
 ```
 

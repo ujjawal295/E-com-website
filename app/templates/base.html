@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}Fashion Store{% endblock %}</title>
+    <title>{% block title %}The Luxc{% endblock %}</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
@@ -12,7 +12,7 @@
 <body>
     <header>
         <div class="container header-container">
-            <a href="{{ url_for('home') }}" class="logo">Fashion<span>Store</span></a>
+            <a href="{{ url_for('home') }}" class="logo">The<span>Luxc</span></a>
             <nav>
                 <ul>
                     <li><a href="{{ url_for('home') }}">Home</a></li>
@@ -21,6 +21,13 @@
                     <li><a href="{{ url_for('category', category='kids') }}">Kids</a></li>
                     <li><a href="{{ url_for('about') }}">About</a></li>
                     <li><a href="{{ url_for('contact') }}">Contact</a></li>
+                    {% if current_user.is_authenticated %}
+                        <li><a href="{{ url_for('auth.profile') }}">My Profile</a></li>
+                        <li><a href="{{ url_for('auth.logout') }}">Logout</a></li>
+                    {% else %}
+                        <li><a href="{{ url_for('auth.login') }}">Login</a></li>
+                        <li><a href="{{ url_for('auth.register') }}">Register</a></li>
+                    {% endif %}
                     <li>
                         <a href="{{ url_for('view_cart') }}" class="cart-icon">
                             <i class="fas fa-shopping-cart"></i>
@@ -56,7 +63,7 @@
         <div class="container">
             <div class="footer-content">
                 <div class="footer-section">
-                    <h3>Fashion Store</h3>
+                    <h3>The Luxc</h3>
                     <p>Your one-stop shop for all fashion needs for men, women, and kids.</p>
                 </div>
                 <div class="footer-section">
@@ -81,12 +88,12 @@
                     <ul>
                         <li><i class="fas fa-map-marker-alt"></i> 123 Fashion Street, City</li>
                         <li><i class="fas fa-phone"></i> +1 234 567 8900</li>
-                        <li><i class="fas fa-envelope"></i> info@fashionstore.com</li>
+                        <li><i class="fas fa-envelope"></i> info@theluxc.com</li>
                     </ul>
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2023 Fashion Store. All rights reserved.</p>
+                <p>&copy; 2023 The Luxc. All rights reserved.</p>
             </div>
         </div>
     </footer>

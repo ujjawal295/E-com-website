@@ -1,0 +1,70 @@
+[
+    {
+        "id": "w1",
+        "name": "Summer Dress",
+        "price": 4499,
+        "image": "women_dress.jpg",
+        "category": "women",
+        "description": "A beautiful and comfortable summer dress perfect for warm days. Made from lightweight, breathable fabric.",
+        "features": [
+            "100% cotton",
+            "A-line silhouette",
+            "V-neck",
+            "Sleeveless",
+            "Machine washable"
+        ],
+        "stock": 30,
+        "sizes": ["XS", "S", "M", "L", "XL"]
+    },
+    {
+        "id": "w2",
+        "name": "Skinny Jeans",
+        "price": 4125,
+        "image": "women_jeans.jpg",
+        "category": "women",
+        "description": "Stylish skinny jeans with a comfortable stretch. Perfect for casual or semi-formal occasions.",
+        "features": [
+            "95% cotton, 5% elastane",
+            "Skinny fit",
+            "High-waisted",
+            "Five-pocket styling",
+            "Machine washable"
+        ],
+        "stock": 45,
+        "sizes": ["24", "26", "28", "30", "32", "34"]
+    },
+    {
+        "id": "w3",
+        "name": "Blouse",
+        "price": 2625,
+        "image": "women_blouse.jpg",
+        "category": "women",
+        "description": "An elegant blouse suitable for office wear or casual outings. Features a flattering cut and comfortable fit.",
+        "features": [
+            "100% polyester",
+            "Regular fit",
+            "Button-up front",
+            "Collared neck",
+            "Machine washable"
+        ],
+        "stock": 35,
+        "sizes": ["XS", "S", "M", "L", "XL"]
+    },
+    {
+        "id": "w4",
+        "name": "Cardigan",
+        "price": 3375,
+        "image": "women_cardigan.jpg",
+        "category": "women",
+        "description": "A cozy and stylish cardigan perfect for layering. Keeps you warm while adding a touch of elegance to your outfit.",
+        "features": [
+            "70% cotton, 30% polyester",
+            "Regular fit",
+            "Button-up front",
+            "Long sleeves",
+            "Machine washable"
+        ],
+        "stock": 25,
+        "sizes": ["S", "M", "L", "XL"]
+    }
+] 

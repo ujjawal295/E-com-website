@@ -1,0 +1,13 @@
+{
+    "users": [
+        {
+            "id": "1",
+            "email": "admin@example.com",
+            "password": "pbkdf2:sha256:600000$dummyhash$123456789",
+            "name": "Admin User",
+            "role": "admin",
+            "created_at": "2024-03-07T00:00:00",
+            "orders": []
+        }
+    ]
+} 

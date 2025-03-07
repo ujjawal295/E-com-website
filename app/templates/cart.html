@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+
+{% block title %}Shopping Cart - Fashion Store{% endblock %}
+
+{% block content %}
+    <h1 class="section-title">Shopping Cart</h1>
+    
+    {% if cart %}
+        <div class="cart-container" style="display: flex; flex-wrap: wrap; gap: 30px;">
+            <div style="flex: 2; min-width: 300px;">
+                <table class="cart-table">
+                    <thead>
+                        <tr>
+                            <th>Product</th>
+                            <th>Price</th>
+                            <th>Quantity</th>
+                            <th>Total</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for item in cart %}
+                            <tr>
+                                <td>
+                                    <div class="cart-product">
+                                        <img src="{{ url_for('static', filename='images/' + item.image) }}" alt="{{ item.name }}">
+                                        <div>
+                                            <h3>{{ item.name }}</h3>
+                                            <p>{{ item.category|capitalize }}</p>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>${{ item.price }}</td>
+                                <td>
+                                    <div class="cart-quantity">
+                                        <form action="{{ url_for('update_cart') }}" method="post">
+                                            <input type="hidden" name="product_id" value="{{ item.id }}">
+                                            <input type="hidden" name="action" value="decrease">
+                                            <button type="submit" class="quantity-btn">-</button>
+                                        </form>
+                                        <span class="quantity-input">{{ item.quantity }}</span>
+                                        <form action="{{ url_for('update_cart') }}" method="post">
+                                            <input type="hidden" name="product_id" value="{{ item.id }}">
+                                            <input type="hidden" name="action" value="increase">
+                                            <button type="submit" class="quantity-btn">+</button>
+                                        </form>
+                                    </div>
+                                </td>
+                                <td>${{ (item.price * item.quantity)|round(2) }}</td>
+                                <td>
+                                    <form action="{{ url_for('update_cart') }}" method="post">
+                                        <input type="hidden" name="product_id" value="{{ item.id }}">
+                                        <input type="hidden" name="action" value="remove">
+                                        <button type="submit" class="btn btn-secondary">Remove</button>
+                                    </form>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            
+            <div style="flex: 1; min-width: 300px;">
+                <div class="cart-summary">
+                    <div class="cart-total">
+                        <span>Total:</span>
+                        <span>${{ cart_total|round(2) }}</span>
+                    </div>
+                    <a href="{{ url_for('checkout') }}" class="btn" style="width: 100%;">Proceed to Checkout</a>
+                    <a href="{{ url_for('home') }}" class="btn btn-secondary" style="width: 100%; margin-top: 10px;">Continue Shopping</a>
+                </div>
+            </div>
+        </div>
+    {% else %}
+        <div style="text-align: center; padding: 50px 0;">
+            <i class="fas fa-shopping-cart" style="font-size: 48px; color: var(--light-text); margin-bottom: 20px;"></i>
+            <h2>Your cart is empty</h2>
+            <p style="margin-bottom: 30px;">Looks like you haven't added any products to your cart yet.</p>
+            <a href="{{ url_for('home') }}" class="btn">Start Shopping</a>
+        </div>
+    {% endif %}
+{% endblock %} 

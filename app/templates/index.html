@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+
+{% block title %}Fashion Store - Home{% endblock %}
+
+{% block content %}
+    <section class="hero">
+        <h1>Welcome to Fashion Store</h1>
+        <p>Discover the latest trends in fashion for men, women, and kids. Quality clothing at affordable prices.</p>
+        <div>
+            <a href="{{ url_for('category', category='men') }}" class="btn">Shop Men</a>
+            <a href="{{ url_for('category', category='women') }}" class="btn btn-accent">Shop Women</a>
+            <a href="{{ url_for('category', category='kids') }}" class="btn btn-secondary">Shop Kids</a>
+        </div>
+    </section>
+
+    <section class="category-nav">
+        <a href="{{ url_for('category', category='men') }}">
+            <i class="fas fa-male"></i> Men's Collection
+        </a>
+        <a href="{{ url_for('category', category='women') }}">
+            <i class="fas fa-female"></i> Women's Collection
+        </a>
+        <a href="{{ url_for('category', category='kids') }}">
+            <i class="fas fa-child"></i> Kids' Collection
+        </a>
+    </section>
+
+    <section>
+        <h2 class="section-title">Featured Products</h2>
+        <div class="products-grid">
+            {% for product in featured_products %}
+                <div class="product-card">
+                    <img src="{{ url_for('static', filename='images/' + product.image) }}" alt="{{ product.name }}" class="product-image">
+                    <div class="product-info">
+                        <h3 class="product-name">{{ product.name }}</h3>
+                        <p class="product-price">${{ product.price }}</p>
+                        <a href="{{ url_for('product_detail', product_id=product.id) }}" class="btn">View Details</a>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </section>
+
+    <section>
+        <h2 class="section-title">Why Choose Us</h2>
+        <div class="products-grid">
+            <div class="product-card">
+                <div class="product-info" style="text-align: center; padding: 30px;">
+                    <i class="fas fa-shipping-fast" style="font-size: 48px; color: var(--primary-color); margin-bottom: 20px;"></i>
+                    <h3 class="product-name">Fast Shipping</h3>
+                    <p>Free shipping on all orders over $50</p>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-info" style="text-align: center; padding: 30px;">
+                    <i class="fas fa-undo" style="font-size: 48px; color: var(--primary-color); margin-bottom: 20px;"></i>
+                    <h3 class="product-name">Easy Returns</h3>
+                    <p>30-day return policy for all items</p>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-info" style="text-align: center; padding: 30px;">
+                    <i class="fas fa-headset" style="font-size: 48px; color: var(--primary-color); margin-bottom: 20px;"></i>
+                    <h3 class="product-name">24/7 Support</h3>
+                    <p>Customer support available all day</p>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-info" style="text-align: center; padding: 30px;">
+                    <i class="fas fa-shield-alt" style="font-size: 48px; color: var(--primary-color); margin-bottom: 20px;"></i>
+                    <h3 class="product-name">Secure Payment</h3>
+                    <p>Safe and secure payment methods</p>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %} 

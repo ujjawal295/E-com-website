@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ product.name }} - Fashion Store{% endblock %}
+
+{% block content %}
+    <div class="product-detail">
+        <div class="product-detail-image">
+            <img src="{{ url_for('static', filename='images/' + product.image) }}" alt="{{ product.name }}">
+        </div>
+        <div class="product-detail-info">
+            <h1 class="product-detail-name">{{ product.name }}</h1>
+            <p class="product-detail-price">${{ product.price }}</p>
+            <div class="product-detail-description">
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, nunc sit amet ultricies lacinia, nisl nisl aliquam nisl, eget aliquam nisl nisl sit amet nisl. Sed euismod, nunc sit amet ultricies lacinia, nisl nisl aliquam nisl, eget aliquam nisl nisl sit amet nisl.</p>
+                <p>Features:</p>
+                <ul>
+                    <li>High-quality material</li>
+                    <li>Comfortable fit</li>
+                    <li>Durable and long-lasting</li>
+                    <li>Easy to care for</li>
+                </ul>
+            </div>
+            <form action="{{ url_for('add_to_cart') }}" method="post">
+                <input type="hidden" name="product_id" value="{{ product.id }}">
+                <button type="submit" class="btn">Add to Cart</button>
+            </form>
+        </div>
+    </div>
+
+    <section>
+        <h2 class="section-title">Related Products</h2>
+        <div class="products-grid">
+            {% for related_product in related_products %}
+                {% if related_product.id != product.id %}
+                    <div class="product-card">
+                        <img src="{{ url_for('static', filename='images/' + related_product.image) }}" alt="{{ related_product.name }}" class="product-image">
+                        <div class="product-info">
+                            <h3 class="product-name">{{ related_product.name }}</h3>
+                            <p class="product-price">${{ related_product.price }}</p>
+                            <a href="{{ url_for('product_detail', product_id=related_product.id) }}" class="btn">View Details</a>
+                        </div>
+                    </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+    </section>
+{% endblock %} 
